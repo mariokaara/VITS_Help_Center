@@ -1,0 +1,689 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>VITSaga alustamine</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="898f62e4-1da3-4ed5-8b47-584826b9055b" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🖥️</span></div><h1 class="page-title">VITSaga alustamine</h1><p class="page-description"></p></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4ced2b0b-3522-4b33-a0bc-49857b85efb1"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Edit help articles just like any other document. Create headings, bullets, numbered lists, a table of contents, etc. Drag and drop images or embed videos.</div></figure><p id="422c9e85-7fe8-47ce-814a-cee04434aeaf" class="">Video VITSa ülesseadmisest </p><figure id="c9984c6c-2901-4edb-a7d1-8de64d706e4a"><div class="source"><a href="https://youtu.be/VTN2BvSmKeM">https://youtu.be/VTN2BvSmKeM</a></div></figure><nav id="23fe7d83-a973-46d4-9c4f-cab7cf7dec60" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#85a5dd66-aca2-4d87-943a-fe75efe60aa1">Lae üles töötajad</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#60d5240c-5817-43b4-bafc-dd3476296329"><strong><mark class="highlight-orange_background">Exceli failiga laadides</mark></strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#77fb5f41-556f-431e-937f-c0efce819c3c"><strong><mark class="highlight-orange_background">Üks haaval töötajate lisamine</mark></strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#43256bd2-8d07-49a4-92d2-4c33f4903e83">Juhendite lisamine</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#272cf440-102d-4d87-ab83-b235a3b3be71"><mark class="highlight-orange_background">Juhendi lisamine</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0560c4ac-1515-46f3-9648-e4e0480e04c1">Tour of features</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#da2f260a-ed0d-4b7f-9fc0-4db4ad3d6520">Sidebar</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#29f705a0-5026-4656-a128-01d4399299f8">Editor</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#02ec30ed-4a29-4607-9711-6fef2b231794">Databases</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bfd6c2ec-6e50-41d5-9ecb-96899bd487c3">FAQs</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1b219f41-28a2-4262-b8ec-c63b8633ce48">Related articles</a></div></nav><p id="48ae1f58-8fec-44de-9f14-331b712bd96a" class="">
+</p><h1 id="85a5dd66-aca2-4d87-943a-fe75efe60aa1" class="">Lae üles töötajad</h1><ul id="a83ab1fb-1016-43f1-b452-f8841f35ed3a" class="bulleted-list"><li style="list-style-type:disc">Töötajad saab üles laadida Exceli failiga või ühe kaupa sisestades</li></ul><h3 id="60d5240c-5817-43b4-bafc-dd3476296329" class=""><strong><mark class="highlight-orange_background">Exceli failiga laadides</mark></strong></h3><ol type="1" id="6b459ccd-e308-4766-bc22-0bad59e24bf7" class="numbered-list" start="1"><li>Mine “Töötajate” vaatesse ning vali sealt “Lisa töötajad failist” <figure id="dbe4e374-02f5-45b0-a66f-40195b8cc8cd" class="image"><a href="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Screenshot_2023-02-17_at_18.17.23.png"><img style="width:4156px" src="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Screenshot_2023-02-17_at_18.17.23.png"/></a></figure></li></ol><ol type="1" id="63b42d8f-483b-4b79-9148-e93e21d8ecae" class="numbered-list" start="2"><li>Lae alla Exceli näidis, mille saad enda ettevõtte töötajate andmetega täita. <figure id="68481945-a574-42aa-87c0-c0fc5a1be084" class="image"><a href="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Screenshot_2023-02-17_at_18.19.51.png"><img style="width:672px" src="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Screenshot_2023-02-17_at_18.19.51.png"/></a></figure></li></ol><ol type="1" id="707bdb12-ea92-4eba-a0ec-07689e285f20" class="numbered-list" start="3"><li>Sisesta oma töötajate andmed järgides täpselt sama formaati (eriti numbrite sisestamisel),         mis on Excelis ette näidatud. Kindlasti tuleb täitsa <strong>kohustuslikud</strong> väljad. </li></ol><ol type="1" id="2cf2d601-a279-45a1-a5b5-e3a74a70d7f3" class="numbered-list" start="4"><li>Lisaks töötajatele saab lisada ka ettevõtte struktuuri Excelisse ning üles laadimisel on teil samasugune struktuur olemas. </li></ol><p id="acf03894-a9f4-4ee9-b84c-bc329cdd3c41" class="">Struktuuri osa leiad Exceli näidise teiselt vahelehelt. Sinna on vaja sisestada esimesse tulpa osakond ja teise tulpa selle sama osakonna ülemosakond. Kui ülemosakond tühjaks jätta, siis loeb süsteem selle kõige kõrgemaks struktuuri osaks. </p><figure id="e98556e5-5916-4389-a24c-30bbf0d59381" class="image"><a href="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Screenshot_2023-02-17_at_18.35.16.png"><img style="width:576px" src="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Screenshot_2023-02-17_at_18.35.16.png"/></a></figure><ol type="1" id="f01b74ee-713c-4f7a-9c65-a71feae013ac" class="numbered-list" start="5"><li>Kui töötajad on Excelisse sisestatud, siis lae Excel üles. <figure id="a6f33f65-f489-4282-a357-02346cd5b7f8" class="image"><a href="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Screenshot_2023-02-17_at_18.27.37.png"><img style="width:672px" src="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Screenshot_2023-02-17_at_18.27.37.png"/></a></figure></li></ol><ol type="1" id="87101463-c3b4-4e7d-a66d-b4ec81da33e6" class="numbered-list" start="6"><li>Kõik töötajad, kes on korrektselt Excelisse sisestatud on nüüd nimekirjana Sinu ees. Kui keegi on puudu, siis ilmselt tuleb vaadata üle, kas numbrite ja nime formaat on õigesti sisestatud. </li></ol><p id="86e463af-a58b-42b0-8f54-cab9a216e62d" class=""><mark class="highlight-yellow_background">Pane tähele! </mark></p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="262f6370-16c9-47b3-9996-93ee51dce001"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Kui importimisel kuupäevad näidatakse 01.01.001, siis on Excelis kuupäeva formaat vale. </div></figure><p id="577ad605-9a24-4f88-bd32-a5b3de73fd95" class="">
+</p><p id="3cc22f07-6cd3-404e-af27-27b9ba256d5c" class="">
+</p><h3 id="77fb5f41-556f-431e-937f-c0efce819c3c" class=""><strong><mark class="highlight-orange_background">Üks haaval töötajate lisamine</mark></strong></h3><p id="15db0910-4a17-43aa-9828-15f594150c92" class="">
+</p><ol type="1" id="8fdc4845-052b-442d-8ee0-f48fd06519bf" class="numbered-list" start="1"><li>Mine töötaja vaatesse ning vajuta “Lisa uus töötaja”. Nupule klikates lihtsalt täida väljad. </li></ol><figure id="977591ed-753b-49b5-996a-e36d05d97264" class="image"><a href="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Screenshot_2023-02-17_at_18.45.38.png"><img style="width:4112px" src="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Screenshot_2023-02-17_at_18.45.38.png"/></a></figure><p id="c2faf9c4-90bd-4303-af55-1181523b68cc" class=""><mark class="highlight-yellow_background">Pane tähele! 💡</mark></p><ul id="8a69fd48-114d-4c38-9903-d265db9f3616" class="bulleted-list"><li style="list-style-type:disc">Kui töötaja ametikohta või osakonda süsteemis pole, siis süsteem pakub “+lisa uus amet” või “+Lisa uus osakond”. Uue osakonna struktuuri saad muuta “Osakondade” all. </li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e4399ef6-a822-4ac1-b494-a8cb53e6c7d5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Kui isikukaitsevahendite vajadus ja tervisekontrolli vajadus on välja lülitatud töötaja profiilis, siis ka Riski Indeksis seda ei kajastata. </div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="78a8c4eb-bc8a-44c6-8cf1-6241ab7d5701"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Kui töötaja ametikohta või osakonda süsteemis pole, siis süsteem pakub “+lisa uus amet” või “+Lisa uus osakond”. Uue osakonna struktuuri saad muuta “Osakondade” all. </div></figure><p id="95cdeb9e-a8b5-4805-9b92-4903f5fbae01" class="">
+</p><p id="f5c4e10c-045c-47e1-bcbd-9a6ee68e22ba" class="">
+</p><p id="8fa630de-508c-4bfa-af9d-e512e1ee9c27" class="">
+</p><p id="1e27f9ca-b8b9-4c52-afae-a83e95680073" class="">
+</p><h1 id="43256bd2-8d07-49a4-92d2-4c33f4903e83" class="">Juhendite lisamine</h1><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="baeaa4a4-9148-42de-a7d8-560a532c788e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Juhenditena võid käsitleda ükskõik milliseid dokumente, mida soovid töötajatele tutvustada ja neilt kinnitust saada. </div></figure><p id="712a0a7b-f051-4e87-9f02-cb87dccc12ab" class="">
+</p><h3 id="272cf440-102d-4d87-ab83-b235a3b3be71" class=""><mark class="highlight-orange_background">Juhendi lisamine</mark></h3><ol type="1" id="bd222db0-fe1f-4f9c-9783-23a21facdd02" class="numbered-list" start="1"><li>Vali “Lisa juhend”<figure id="603b0301-34ad-4be4-ba0a-81580bc7dd5e" class="image"><a href="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Screenshot_2023-03-22_at_14.42.31.png"><img style="width:3314px" src="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Screenshot_2023-03-22_at_14.42.31.png"/></a></figure></li></ol><p id="8be892ba-532d-4086-b4b7-d78269cff915" class="">
+</p><ol type="1" id="179791e2-9cc4-4719-a899-2b91ce66b85f" class="numbered-list" start="2"><li>Täida väljad<figure id="2d422cf2-1d43-4dab-a6d4-a66df829ba58" class="image"><a href="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Screenshot_2023-03-22_at_14.44.12.png"><img style="width:1926px" src="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Screenshot_2023-03-22_at_14.44.12.png"/></a></figure></li></ol><p id="019760f0-39e3-4d94-81d7-882a91d7358c" class="">
+</p><ul id="134cae86-994e-43ef-8ec0-3e050feeb37d" class="bulleted-list"><li style="list-style-type:disc"><strong>Valitud ametikohtadele on see konkreetne juhend kohustuslik</strong> ning süsteem lisab selle töötaja juhendamiste paketti. Vt Töötajate juhendamine</li></ul><ul id="c8e8d412-26b7-44e7-94c0-f0de4197a207" class="bulleted-list"><li style="list-style-type:disc">Juhendaja vali siis, kui Sa tahad, et juhendaja saaks teavituse töötaja poolt läbitud juhendamisest ning kui juhendaja peab selle ka omaltpoolt kinnitama. </li></ul><ul id="e909051f-bbfb-4640-8603-0d02d9c02678" class="bulleted-list"><li style="list-style-type:disc">Juhendile saad lisada video linke (youtube, vimeo ja loom)</li></ul><p id="84e06765-259b-426d-bfe8-bff4de635a8d" class="">
+</p><p id="b34e6607-91d6-4380-956d-494a612662da" class=""> Adding instructive screenshots, GIFs, or videos is a snap. </p><ul id="f4ae62bb-373e-4f55-a8b5-da3fcbd74ea2" class="bulleted-list"><li style="list-style-type:disc">Drag and drop any image into the page.</li></ul><ul id="e23c82ac-30fd-4609-8a45-52e05a8fab42" class="bulleted-list"><li style="list-style-type:disc">Type <code>/video</code> to embed a video file of your choosing (including from YouTube or Vimeo).</li></ul><ul id="aadd0c13-4d47-4970-be25-b7d4db91f54c" class="bulleted-list"><li style="list-style-type:disc">Here&#x27;s a handy example showing how to add a table of contents:</li></ul><figure id="50188b7c-deff-4262-beed-2cba130fc729" class="image"><a href="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Table_of_Contents.gif"><img style="width:748px" src="VITSaga%20alustamine%20898f62e41da34ed58b47584826b9055b/Table_of_Contents.gif"/></a></figure><h1 id="0560c4ac-1515-46f3-9648-e4e0480e04c1" class="">Tour of features</h1><p id="285d1850-6d0a-4412-b2f4-1691086ddecf" class="">Every section can have its own heading and subheadings. For example:</p><h3 id="da2f260a-ed0d-4b7f-9fc0-4db4ad3d6520" class="">Sidebar</h3><h3 id="29f705a0-5026-4656-a128-01d4399299f8" class="">Editor</h3><h3 id="02ec30ed-4a29-4607-9711-6fef2b231794" class="">Databases</h3><ul id="be6c3c0b-434b-4e94-87cf-b0803812f64b" class="bulleted-list"><li style="list-style-type:disc">See how the table of contents indents subheadings?</li></ul><h1 id="bfd6c2ec-6e50-41d5-9ecb-96899bd487c3" class="">FAQs</h1><ul id="7f9db259-0e8d-40ba-bbca-258a1b2fbe78" class="toggle"><li><details open=""><summary>Use toggles to simplify FAQs. </summary></details></li></ul><ul id="fbb135d3-1f73-4720-b965-936de72eb9ea" class="toggle"><li><details open=""><summary>Nest content inside toggles to keep pages short and easy to read.</summary></details></li></ul><ul id="a42530bb-f1b8-4487-81f4-20960bcb91a7" class="toggle"><li><details open=""><summary>You can even nest images and embeds inside toggles! ✨</summary></details></li></ul><h1 id="1b219f41-28a2-4262-b8ec-c63b8633ce48" class="">Related articles</h1><p id="d8f6b2aa-49ae-4e39-b34a-5615babddb23" class="block-color-gray">You can link to other pages in your help center. If you change their titles, they&#x27;ll automatically update everywhere they are linked.</p><p id="3cc54f8a-fa7a-47e5-badc-d1e055bcb40b" class="">
+</p><p id="c5610f59-1755-46c4-9e08-55a8ca472be3" class="">
+</p><p id="2735b3fc-48e5-4dfc-9299-b14b4ec30715" class="block-color-gray"><strong>Did we miss something?
+</strong>Not to worry! Just email our support team at <a href="mailto:team@getacme.co">team@getacme.co</a> ✌️</p></div></article></body></html>
